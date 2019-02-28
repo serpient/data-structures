@@ -53,6 +53,7 @@ class LinkedListVisualizer extends React.Component {
   }
   sortNames = (list) => {
     list.sort();
+    this.forceUpdate();
   }
   resetList = () => {
     this.setState({ list: new LinkedList() });

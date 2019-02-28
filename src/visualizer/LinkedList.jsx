@@ -17,7 +17,7 @@ const Node = ({ node }) => {
     className = 'node--tail';
   }
   return (
-    <div key={item} className={`node ${className ? className : ''}`}>{item}</div>
+    <div key={item} className={`node ${className && className}`}>{item}</div>
   )
 }
 
@@ -51,10 +51,10 @@ class LinkedListVisualizer extends React.Component {
     })
     this.setState({ list })
   }
-  sortNames = () => {
-    this.state.list.sort();
+  sortNames = (list) => {
+    list.sort();
   }
-  sortNames = () => {
+  resetList = () => {
     this.setState({ list: new LinkedList() });
   }
   render() {
@@ -65,7 +65,7 @@ class LinkedListVisualizer extends React.Component {
           <button onClick={() => this.addNames(names)} className='visualizer-btn'>
             Add Names
           </button>
-          <button onClick={() => this.sortNames()} className='visualizer-btn'>
+          <button onClick={() => this.sortNames(list)} className='visualizer-btn'>
             Sort Names
           </button>
           <button onClick={() => this.resetList()} className='visualizer-btn'>

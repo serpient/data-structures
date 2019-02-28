@@ -1,10 +1,5 @@
 class LinkedList {
   constructor() {
-    this.node = {
-      prev: null,
-      item: null,
-      next: null
-    };
     this.head = null;
   }
   getHead() {
@@ -15,6 +10,9 @@ class LinkedList {
   }
   getLastNode() {
     let currNode = this.head;
+    if (!currNode) {
+      return null;
+    }
     while (currNode.next) {
       currNode = currNode.next;
     }
@@ -138,6 +136,32 @@ class LinkedList {
     return item;
   }
   sort() {
+    if (!this.head || !this.head.next) {
+      return false;
+    }
+    let currNode = this.head.next;
+
+    let swapCount = 0;
+    while (currNode.next) {
+      let nextNode = currNode.next;
+      if (
+        currNode.prev &&
+        this.parseFirstOf(currNode.item) < this.parseFirstOf(currNode.prev.item)
+      ) {
+        let prevNode = currNode.prev;
+        let node = this.unlink(currNode);
+        this.insertprev(prevNode, node);
+        console.log(`insert ${node.item} prev ${prevNode.item}`);
+        swapCount++;
+      }
+      currNode = nextNode;
+    }
+    if (swapCount !== 0) {
+      return this.sort();
+    }
+    return;
+  }
+  sortRecursively() {
     if (!this.head || !this.head.next) {
       return false;
     }

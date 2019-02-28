@@ -1,0 +1,30 @@
+@import 'styles/_shared.scss';
+
+.visualizer {
+  max-width: $max-width;
+  margin: 0 auto;
+  display: grid;
+  justify-items: center;
+}
+.node {
+  background-color: white;
+  color: $dark-grey;
+  font-weight: 600;
+  min-width: 200px;
+  max-width: 250px;
+  margin: 10px 0px;
+  display: block;
+  padding: 6px;
+  border-radius: 5px;
+  box-shadow: $box-shadow-dark;
+}
+
+.node--head {
+  background-color: $theme-green;
+  color: white;
+}
+
+.node--tail {
+  background-color: $blue;
+  color: white;
+}

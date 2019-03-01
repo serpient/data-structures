@@ -47,8 +47,10 @@ class LinkedList {
     node.prev = lastNode;
   }
   shift() {
+    let hasHead = this.head;
+    let hasMoreThanOneNode = hasHead && this.head.next;
     // removes first item in list
-    if (!this.head || this.head.next) {
+    if (!hasHead || !hasMoreThanOneNode) {
       // a empty or a list with 1 item
       this.head = null;
     } else {

@@ -149,3 +149,21 @@ describe('linkedList UNSHIFT method', () => {
     })
   })
 })
+
+describe('linkedList SORT method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
+  })
+
+  it('sorts a list in ascending order', () => {
+    list.push('d');
+    list.push('c');
+    list.push('b');
+    list.push('a');
+    list.sort();
+    expect(list.getHead().item).toEqual('a');
+    expect(list.getTail().item).toEqual('d');
+  })
+
+});

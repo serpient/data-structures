@@ -150,6 +150,61 @@ describe('linkedList UNSHIFT method', () => {
   })
 })
 
+describe('linkedList UNLINK method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
+  })
+  
+  it('unlinks a node correctly -- head', () => {
+    list.push('one');
+    let node = list.unlink(list.getHead())
+    expect(list.getHead()).toEqual(null)
+    expect(node).toEqual({
+      prev: null,
+      item: 'one',
+      next: null,
+    })
+  })
+
+  it('unlinks a node correctly -- tail', () => {
+    list.push('one');
+    list.push('two');
+    let node = list.unlink(list.getHead().next)
+    expect(list.getHead()).toEqual({
+      prev: null,
+      item: 'one',
+      next: null,
+    });
+    expect(node).toEqual({
+      prev: null,
+      item: 'two',
+      next: null,
+    })
+  })
+
+  it('unlinks a node correctly -- middle', () => {
+    list.push('one');
+    list.push('two');
+    list.push('three');
+    let node = list.unlink(list.getHead().next)
+    expect(list.getHead()).toEqual({
+      prev: null,
+      item: 'one',
+      next: {
+        prev: list.getHead(),
+        item: 'three',
+        next: null,
+      },
+    });
+    expect(node).toEqual({
+      prev: null,
+      item: 'two',
+      next: null,
+    })
+  })
+});
+
 describe('linkedList SORT method', () => {
   let list;
   beforeEach(() => {

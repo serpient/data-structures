@@ -156,7 +156,7 @@ describe('linkedList SORT method', () => {
     list = new LinkedList();
   })
 
-  it('sorts a list in ascending order', () => {
+  it('sorts a list in ascending order - LETTER', () => {
     list.push('d');
     list.push('c');
     list.push('b');
@@ -166,4 +166,23 @@ describe('linkedList SORT method', () => {
     expect(list.getTail().item).toEqual('d');
   })
 
+  it('sorts a list in ascending order - NUMBER', () => {
+    list.push(10);
+    list.push(6);
+    list.push(8);
+    list.push(0);
+    list.sort();
+    expect(list.getHead().item).toEqual(0);
+    expect(list.getTail().item).toEqual(10);
+  })
+
+  it('sorts a list in ascending order - STRINGS', () => {
+    list.push('andy');
+    list.push('andree');
+    list.push('abbie');
+    list.push('aaron');
+    list.sort();
+    expect(list.getHead().item).toEqual('aaron');
+    expect(list.getTail().item).toEqual('andy');
+  })
 });

@@ -106,8 +106,11 @@ class LinkedList {
 
     return node;
   }
-  insertprev(node, newNode) {
-    if (!node.prev) {
+  insertPrev(node, newNode) {
+    if (!node) {
+      // empty list
+      this.head = newNode;
+    } else if (!node.prev) {
       // at head of list
       this.unshift(newNode.item);
     } else {
@@ -155,7 +158,7 @@ class LinkedList {
       ) {
         let prevNode = currNode.prev;
         let node = this.unlink(currNode);
-        this.insertprev(prevNode, node);
+        this.insertPrev(prevNode, node);
         console.log(`insert ${node.item} prev ${prevNode.item}`);
         swapCount++;
       }
@@ -181,7 +184,7 @@ class LinkedList {
       ) {
         let prevNode = currNode.prev;
         let node = this.unlink(currNode);
-        this.insertprev(prevNode, node);
+        this.insertPrev(prevNode, node);
         console.log(`insert ${node.item} prev ${prevNode.item}`);
         swapCount++;
       }

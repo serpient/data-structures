@@ -8,6 +8,9 @@ class LinkedList {
   getNext(item) {
     return item.next;
   }
+  getTail() {
+    return this.getLastNode();
+  }
   getLastNode() {
     let currNode = this.head;
     if (!currNode) {

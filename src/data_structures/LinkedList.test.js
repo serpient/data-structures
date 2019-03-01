@@ -1,22 +1,18 @@
 import LinkedList from 'data_structures/LinkedList.js';
 
-describe('linkedList methods', () => {
+it('creates new list with correct constructor', () => {
+  const list = new LinkedList();
+  expect(list).toEqual({head: null});
+})
+
+describe('linkedList PUSH method', () => {
   let list;
   beforeEach(() => {
     list = new LinkedList();
   })
-    
-  it('creates new list with correct constructor', () => {
-    expect(list).toEqual({head: null});
-  })
 
   it('assigns first item as head when using push', () => {
     list.push('one');
-    expect(list.getHead()).toEqual({ prev: null, item: 'one', next: null });
-  })
-
-  it('assigns first item as head when using unshift', () => {
-    list.unshift('one');
     expect(list.getHead()).toEqual({ prev: null, item: 'one', next: null });
   })
 
@@ -30,20 +26,43 @@ describe('linkedList methods', () => {
       next: null,
     });
   })
+})
 
-  it('adds new node to beginning of list when using unshift', () => {
+describe('linkedList SHIFT method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
+  })
+
+  it('removes first element from list -- list is empty', () => {
+    list.shift();
+    expect(list).toEqual({ head: null });
+  })
+
+  it('removes first element from list -- list has 1 node', () => {
     list.push('one');
-    list.unshift('two');
-    const head = list.getHead();
-    expect(head).toEqual({
+    list.shift();
+    expect(list).toEqual({
+      head: null
+    });
+  })
+
+  it('removes first element from list -- list has 2 nodes', () => {
+    list.push('one');
+    list.push('two');
+    list.shift();
+    expect(list.getHead()).toEqual({
       prev: null,
       item: 'two',
-      next: {
-        prev: list.getHead(),
-        item: 'one',
-        next: null,
-      }
-    })
+      next: null,
+    });
+  })
+})
+
+describe('linkedList GETLASTNODE method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
   })
 
   it('retrieves last element from list -- list is empty', () => {
@@ -71,6 +90,14 @@ describe('linkedList methods', () => {
       next: null,
     });
   })
+});
+
+
+describe('linkedList POP method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
+  })
 
   it('removes last element from list -- list is empty', () => {
     list.pop();
@@ -92,5 +119,33 @@ describe('linkedList methods', () => {
       item: 'one',
       next: null,
     });
+  })
+});
+
+
+describe('linkedList UNSHIFT method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
+  })
+
+  it('assigns first item as head when using unshift', () => {
+    list.unshift('one');
+    expect(list.getHead()).toEqual({ prev: null, item: 'one', next: null });
+  })
+
+  it('adds new node to beginning of list when using unshift', () => {
+    list.unshift('one');
+    list.unshift('two');
+    const head = list.getHead();
+    expect(head).toEqual({
+      prev: null,
+      item: 'two',
+      next: {
+        prev: list.getHead(),
+        item: 'one',
+        next: null,
+      }
+    })
   })
 })

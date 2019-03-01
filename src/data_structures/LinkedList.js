@@ -141,6 +141,29 @@ class LinkedList {
     if (!this.head || !this.head.next) {
       return false;
     }
+    let swapCount;
+    do {
+      let currNode = this.head.next;
+      swapCount = 0;
+      while (currNode) {
+        let nextNode = currNode.next;
+        if (currNode.prev && currNode.item < currNode.prev.item) {
+          let prevNode = currNode.prev;
+          let node = this.unlink(currNode);
+          this.insertPrev(prevNode, node);
+          console.log(`insert ${node.item} prev ${prevNode.item}`);
+          swapCount++;
+        }
+        currNode = nextNode;
+      }
+    } while (swapCount !== 0);
+
+    return;
+  }
+  sortRecursively() {
+    if (!this.head || !this.head.next) {
+      return false;
+    }
     let currNode = this.head.next;
 
     let swapCount = 0;
@@ -161,32 +184,6 @@ class LinkedList {
       return this.sort();
     }
 
-    return;
-  }
-  sortRecursively() {
-    if (!this.head || !this.head.next) {
-      return false;
-    }
-    let currNode = this.head.next;
-    let swapCount = 0;
-    while (currNode.next) {
-      this.printAllItems();
-      let nextNode = currNode.next;
-      if (
-        currNode.prev &&
-        this.parseFirstOf(currNode.item) < this.parseFirstOf(currNode.prev.item)
-      ) {
-        let prevNode = currNode.prev;
-        let node = this.unlink(currNode);
-        this.insertPrev(prevNode, node);
-        console.log(`insert ${node.item} prev ${prevNode.item}`);
-        swapCount++;
-      }
-      currNode = nextNode;
-    }
-    if (swapCount !== 0) {
-      return this.sort();
-    }
     return;
   }
   includes(item) {

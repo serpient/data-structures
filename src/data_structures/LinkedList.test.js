@@ -203,6 +203,97 @@ describe('linkedList UNLINK method', () => {
       next: null,
     })
   })
+
+});
+
+describe('linkedList INSERTPREV method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
+  })
+
+  it('inserts node before correctly -- Before EMPTY Head', () => {
+    let node = {
+      prev: null,
+      item: 'one',
+      next: null,
+    }
+    list.insertPrev(list.getHead(), node);
+    expect(list.getHead()).toEqual({
+      prev: null,
+      item: 'one',
+      next: null,
+    })
+  })
+
+  it('inserts node before correctly -- Before Head', () => {
+    let node = {
+      prev: null,
+      item: 'two',
+      next: null,
+    }
+    list.push('one');
+    let referenceToHead = list.getHead();
+    list.insertPrev(list.getHead(), node);
+    expect(list.getHead()).toEqual({
+      prev: null,
+      item: 'two',
+      next: referenceToHead,
+    })
+  })
+
+  it('inserts node before correctly -- 2 Nodes', () => {
+    let node = {
+      prev: null,
+      item: 'three',
+      next: null,
+    }
+    list.push('one');
+    list.push('two');
+    let referenceToHead = list.getHead().next;
+    list.insertPrev(referenceToHead, node);
+    expect(list.getHead().next).toEqual({
+      prev: list.getHead(),
+      item: 'three',
+      next: referenceToHead,
+    })
+  })
+});
+
+describe('linkedList INSERTAFTER method', () => {
+  let list;
+  beforeEach(() => {
+    list = new LinkedList();
+  })
+
+  it('inserts node after correctly -- After EMPTY Head', () => {
+    let node = {
+      prev: null,
+      item: 'one',
+      next: null,
+    }
+    list.insertPrev(list.getHead(), node);
+    expect(list.getHead()).toEqual({
+      prev: null,
+      item: 'one',
+      next: null,
+    })
+  })
+
+  it('inserts node after correctly -- After Tail of 1 node list', () => {
+    let node = {
+      prev: null,
+      item: 'two',
+      next: null,
+    }
+    list.push('one');
+    list.insertAfter(list.getHead(), node);
+    expect(list.getTail()).toEqual({
+      prev: list.getHead(),
+      item: 'two',
+      next: null,
+    })
+  })
 });
 
 describe('linkedList SORT method', () => {

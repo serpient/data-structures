@@ -1,25 +1,27 @@
-import React from 'react';
-import LinkedList from 'data_structures/LinkedList.js';
-import names from 'data/names.js';
-import './LinkedList.scss';
+import React from "react";
+import LinkedList from "data_structures/LinkedList.js";
+import names from "data/names.js";
+import "./LinkedList.scss";
 
 const Node = ({ node }) => {
   let { prev, item, next } = node;
   let className;
   if (!prev && !next) {
     // detached node
-    className = 'node--detached';
+    className = "node--detached";
   } else if (!prev) {
     // head node
-    className = 'node--head';
+    className = "node--head";
   } else if (!next) {
     // tail node
-    className = 'node--tail';
+    className = "node--tail";
   }
   return (
-    <div key={item} className={`node ${className && className}`}>{item}</div>
-  )
-}
+    <div key={item} className={`node ${className && className}`}>
+      {item}
+    </div>
+  );
+};
 
 const Nodes = ({ data }) => {
   if (!data.getHead()) {
@@ -35,47 +37,53 @@ const Nodes = ({ data }) => {
     currNode = currNode.next;
   }
   return returnedNodes;
-}
+};
 
 class LinkedListVisualizer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      list: new LinkedList(),
-    }
+      list: new LinkedList()
+    };
   }
-  addNames = (names) => {
+  addNames = names => {
     let { list } = this.state;
     names.forEach(obj => {
       list.push(obj.name);
-    })
-    this.setState({ list })
-  }
-  sortNames = (list) => {
+    });
+    this.setState({ list });
+  };
+  sortNames = list => {
     list.sort();
     this.forceUpdate();
-  }
+  };
   resetList = () => {
     this.setState({ list: new LinkedList() });
-  }
+  };
   render() {
     let { list } = this.state;
     return (
-      <div className='visualizer visualizer--linked-list'>
-        <section className='visualizer--controls'>
-          <button onClick={() => this.addNames(names)} className='visualizer-btn'>
+      <div className="visualizer visualizer--linked-list">
+        <section className="visualizer--controls">
+          <button
+            onClick={() => this.addNames(names)}
+            className="visualizer-btn"
+          >
             Add Names
           </button>
-          <button onClick={() => this.sortNames(list)} className='visualizer-btn'>
+          <button
+            onClick={() => this.sortNames(list)}
+            className="visualizer-btn"
+          >
             Sort Names
           </button>
-          <button onClick={() => this.resetList()} className='visualizer-btn'>
+          <button onClick={() => this.resetList()} className="visualizer-btn">
             Reset List
           </button>
         </section>
         <Nodes data={list} />
       </div>
-    )
+    );
   }
 }
 

@@ -29,7 +29,7 @@ class LinkedList {
     } else {
       let lastNode = this.getLastNode();
       let prevNode = lastNode.prev;
-      prevNode.next = null
+      prevNode.next = null;
     }
   }
   push(item) {
@@ -76,7 +76,7 @@ class LinkedList {
     this.head = node;
   }
   printAllItems() {
-    console.log('=============')
+    console.log("=============");
     let currNode = this.head;
     while (currNode.item) {
       console.log(currNode.item);
@@ -137,12 +137,6 @@ class LinkedList {
       nextNode.prev = newNode;
     }
   }
-  parseFirstOf(item) {
-    if (typeof item === "string") {
-      return item.toLowerCase().charCodeAt(0);
-    }
-    return item;
-  }
   sort() {
     if (!this.head || !this.head.next) {
       return false;
@@ -150,12 +144,10 @@ class LinkedList {
     let currNode = this.head.next;
 
     let swapCount = 0;
-    while (currNode.next) {
+    while (currNode) {
+      // this.printAllItems();
       let nextNode = currNode.next;
-      if (
-        currNode.prev &&
-        this.parseFirstOf(currNode.item) < this.parseFirstOf(currNode.prev.item)
-      ) {
+      if (currNode.prev && currNode.item < currNode.prev.item) {
         let prevNode = currNode.prev;
         let node = this.unlink(currNode);
         this.insertPrev(prevNode, node);
@@ -164,9 +156,11 @@ class LinkedList {
       }
       currNode = nextNode;
     }
+
     if (swapCount !== 0) {
       return this.sort();
     }
+
     return;
   }
   sortRecursively() {
